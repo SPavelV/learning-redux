@@ -19,7 +19,7 @@ import { showNextPhoto } from "../bus/gallery/actions";
 export class Gallery extends Component {
   _showNextPhoto = () => {
     store.dispatch(showNextPhoto);
-    this.forceUpdate();
+    // this.forceUpdate();
   };
 
   render() {
