@@ -13,10 +13,19 @@ import Styles from "./styles.m.css";
 import { store } from "../init/store";
 
 // Actions
-import { showNextPhoto, showSelectedPhoto } from "../bus/gallery/actions";
+import {
+  showNextPhoto,
+  showSelectedPhoto,
+  showPrevPhoto,
+} from "../bus/gallery/actions";
 
 @hot(module)
 export class Gallery extends Component {
+  _showPrevPhoto = () => {
+    store.dispatch(showPrevPhoto());
+    this.forceUpdate();
+  };
+
   _showNextPhoto = () => {
     store.dispatch(showNextPhoto());
     this.forceUpdate();
@@ -47,7 +56,7 @@ export class Gallery extends Component {
       <section className={Styles.gallery}>
         <img src={photo.url} />
         <div>
-          <button>←</button>
+          <button onClick={this._showPrevPhoto}>←</button>
           {buttons}
           <button onClick={this._showNextPhoto}>→</button>
         </div>
