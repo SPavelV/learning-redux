@@ -13,13 +13,18 @@ import Styles from "./styles.m.css";
 import { store } from "../init/store";
 
 // Actions
-import { showNextPhoto } from "../bus/gallery/actions";
+import { showNextPhoto, showSelectedPhoto } from "../bus/gallery/actions";
 
 @hot(module)
 export class Gallery extends Component {
   _showNextPhoto = () => {
-    store.dispatch(showNextPhoto);
-    // this.forceUpdate();
+    store.dispatch(showNextPhoto());
+    this.forceUpdate();
+  };
+
+  _showSelectedPhoto = (event) => {
+    store.dispatch(showSelectedPhoto(event.target.value));
+    this.forceUpdate();
   };
 
   render() {
@@ -31,8 +36,10 @@ export class Gallery extends Component {
     const buttons = [...Array(4).keys()].map((_, currentImageIndex) => (
       <Button
         key={currentImageIndex}
+        value={currentImageIndex}
         currentImageIndex={currentImageIndex}
         selectedImageIndex={selectedPhotoIndex}
+        onClick={this._showSelectedPhoto}
       />
     ));
 
