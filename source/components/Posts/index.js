@@ -16,7 +16,6 @@ import { Composer, Catcher, Post } from "../../components";
 import { fetchPostsAsync } from "../../bus/posts/actions";
 
 const mapStateToProps = (state) => {
-  console.log("state ", state);
   return {
     posts: state.posts,
   };
@@ -38,7 +37,6 @@ export class Posts extends Component {
 
   componentDidMount() {
     const { actions } = this.props;
-    console.log("this.props ", this.props);
     actions.fetchPostsAsync();
   }
 
