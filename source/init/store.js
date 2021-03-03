@@ -1,10 +1,13 @@
 // Core
 import { createStore } from "redux";
 
-// Reducer
+// Roots
 import { rootReducer } from "./rootReducer";
+import { rootSaga } from "./rootSaga";
 
-// Enhancer store
-import { enhacedStore } from "./middleware/core";
+// Middleware
+import { enhacedStore, sagaMiddleware } from "./middleware/core";
 
 export const store = createStore(rootReducer, enhacedStore);
+
+sagaMiddleware.run(rootSaga);
