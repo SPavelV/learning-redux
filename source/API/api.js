@@ -11,5 +11,15 @@ export const api = {
         },
       });
     },
+    create(post) {
+      return fetch(`${MAIN_URL}/feed`, {
+        method: "POST",
+        headers: {
+          "x-no-auth": groupId,
+          "Content-Type": "application/json/;charset=utf-8",
+        },
+        body: JSON.stringify(post),
+      });
+    },
   },
 };

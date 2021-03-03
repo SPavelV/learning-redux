@@ -2,7 +2,7 @@
 import { fromJS, List } from "immutable";
 
 // Instruments
-import { FILL_POSTS } from "./types";
+import { FILL_POSTS, CREATE_POST_ASYNC } from "./types";
 
 const initialState = List();
 
