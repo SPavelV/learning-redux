@@ -15,8 +15,6 @@ export function* worker() {
     if (response.status !== 200) {
       throw new Error(message);
     }
-
-    yield put(postsActions.createPost(post));
   } catch (error) {
     yield put(uiActions.emitError(error, " worker"));
   } finally {
