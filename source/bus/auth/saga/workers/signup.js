@@ -18,8 +18,6 @@ export function* signup({ payload: userInfo }) {
       throw new Error(message);
     }
 
-    console.log("profile ", profile);
-
     yield put(profileActions.fillProfile(profile));
     yield put(authActions.authenticate());
   } catch (error) {

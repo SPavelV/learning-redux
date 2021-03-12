@@ -9,7 +9,7 @@ import Styles from "./styles.m.css";
 import { login } from "../../bus/forms/shapes";
 
 // Actions
-import { loginActions } from "../../bus/login/actions";
+import { authActions } from "../../bus/auth/actions";
 
 const mapStateToProps = (state) => {
   return {
@@ -18,7 +18,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-  loginAsync: loginActions.loginAsync,
+  loginAsync: authActions.loginAsync,
 };
 
 @connect(mapStateToProps, mapDispatchToProps)
