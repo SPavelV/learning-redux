@@ -9,6 +9,9 @@ import Styles from "./styles.m.css";
 import { book } from "../../routes/book";
 import { mockedProfile } from "../../instruments/mockedData";
 
+// Actions
+import { authActions } from "../../bus/auth/actions";
+
 const mapStateToProps = (state) => {
   return {
     isAuthenticated: state.auth.get("isAuthenticated"),
@@ -16,14 +19,15 @@ const mapStateToProps = (state) => {
   };
 };
 
-@connect(mapStateToProps)
+const mapDispatchToProps = {
+  logoutAsync: authActions.logoutAsync,
+};
+
+@connect(mapStateToProps, mapDispatchToProps)
 export class Header extends Component {
   static defaultProps = {
     // State
     isOnline: false,
-
-    // Actions
-    logoutAsync: () => {},
   };
 
   _getNav = () => {

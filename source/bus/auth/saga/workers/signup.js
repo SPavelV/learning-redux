@@ -23,6 +23,6 @@ export function* signup({ payload: userInfo }) {
   } catch (error) {
     yield put(uiActions.emitError(error, "signup worker"));
   } finally {
-    yield put(uiActions.stopFetching);
+    yield put(uiActions.stopFetching());
   }
 }

@@ -6,8 +6,11 @@ import { authActions } from "../../actions";
 
 export function* initialize() {
   const token = yield apply(localStorage, localStorage.getItem, ["token"]);
-  console.log("initialize async");
-  if (token) {
+  const remember = yield apply(localStorage, localStorage.getItem, [
+    "remember",
+  ]);
+
+  if (token && remember) {
     yield put(authActions.authenticateAsync());
   } else {
     yield put(authActions.initialize());
