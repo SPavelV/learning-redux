@@ -9,14 +9,21 @@ import { uiActions } from "../../../ui/actions";
 export function* createPost({ payload: comment }) {
   try {
     yield put(uiActions.startFetching);
-    console.log("comment", comment);
 
     const response = yield apply(api, api.posts.create, [comment]);
-    console.log("response", response);
     const { data: post, message } = yield apply(response, response.json);
-    console.log(post);
 
     if (response.status !== 200) {
+      throw new Error(message);
+    }
+
+    if (response.status !== 200) {
+      if (response.status === 401) {
+        yield apply(localStorage, localStorage.removeItem, ["token"]);
+        yield apply(localStorage, localStorage.removeItem, ["remember"]);
+
+        return null;
+      }
       throw new Error(message);
     }
 

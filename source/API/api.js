@@ -51,14 +51,22 @@ export const api = {
         },
       });
     },
-    create(post) {
+    create(comment) {
       return fetch(`${MAIN_URL}/feed`, {
         method: "POST",
         headers: {
           Authorization: this.token,
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(post),
+        body: JSON.stringify({ comment }),
+      });
+    },
+    remove(id) {
+      return fetch(`${MAIN_URL}/feed/${id}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: this.token,
+        },
       });
     },
   },
