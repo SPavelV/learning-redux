@@ -19,6 +19,8 @@ export function* unlikePost({ payload: postId }) {
       return state.profile.removeAll(["avatar", "token"]);
     });
 
+    console.log(`liker `, liker);
+
     yield put(postsActions.unlikePost({ liker, postId }));
   } catch (error) {
     yield put(uiActions.emitError(error, "unlikePost worker"));
