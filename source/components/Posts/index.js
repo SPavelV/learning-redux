@@ -2,18 +2,17 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { List } from "immutable";
 import FlipMove from "react-flip-move";
 
 // Instruments
 import Styles from "./styles.m.css";
-import { mockedProfile } from "../../instruments/mockedData";
 
 // Components
 import { Composer, Catcher, Post } from "../../components";
 
 // Actions
 import { postsActions } from "../../bus/posts/actions";
+import { usersActions } from "../../bus/users/actions";
 
 const mapStateToProps = (state) => {
   return {
@@ -26,11 +25,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     actions: bindActionCreators(
       {
-        fetchPostsAsync: postsActions.fetchPostsAsync,
-        createPostAsync: postsActions.createPostAsync,
-        removePostAsync: postsActions.removePostAsync,
-        likePostAsync: postsActions.likePostAsync,
-        unlikePostAsync: postsActions.unlikePostAsync,
+        ...postsActions,
+        ...usersActions,
       },
       dispatch
     ),
@@ -42,6 +38,7 @@ export class Posts extends Component {
   componentDidMount() {
     const { actions } = this.props;
     actions.fetchPostsAsync();
+    actions.fetchUsersAsync();
   }
 
   render() {
