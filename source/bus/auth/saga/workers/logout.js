@@ -10,7 +10,7 @@ import { postsActions } from "../../../posts/actions";
 
 export function* logout() {
   try {
-    yield put(uiActions.startFetching);
+    yield put(uiActions.startFetching());
 
     const response = yield apply(api, api.auth.logout);
 

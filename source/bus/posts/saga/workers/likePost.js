@@ -6,7 +6,7 @@ import { uiActions } from "../../../ui/actions";
 
 export function* likePost({ payload: postId }) {
   try {
-    yield put(uiActions.startFetching);
+    yield put(uiActions.startFetching());
 
     const response = yield apply(api, api.posts.like, [postId]);
 
@@ -24,6 +24,6 @@ export function* likePost({ payload: postId }) {
   } catch (error) {
     yield put(uiActions.emitError(error, "likePost worker"));
   } finally {
-    yield put(uiActions.stopFetching);
+    yield put(uiActions.stopFetching());
   }
 }

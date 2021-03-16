@@ -6,7 +6,7 @@ import { uiActions } from "../../../ui/actions";
 
 export function* unlikePost({ payload: postId }) {
   try {
-    yield put(uiActions.startFetching);
+    yield put(uiActions.startFetching());
 
     const response = yield apply(api, api.posts.like, [postId]);
 
@@ -19,12 +19,10 @@ export function* unlikePost({ payload: postId }) {
       return state.profile.removeAll(["avatar", "token"]);
     });
 
-    console.log(`liker `, liker);
-
     yield put(postsActions.unlikePost({ liker, postId }));
   } catch (error) {
     yield put(uiActions.emitError(error, "unlikePost worker"));
   } finally {
-    yield put(uiActions.stopFetching);
+    yield put(uiActions.stopFetching());
   }
 }

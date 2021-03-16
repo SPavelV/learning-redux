@@ -6,7 +6,7 @@ import { uiActions } from "../../../ui/actions";
 
 export function* fillPosts() {
   try {
-    yield put(uiActions.startFetching);
+    yield put(uiActions.startFetching());
 
     const response = yield apply(api, api.posts.fetch);
     const { data: posts, message } = yield apply(response, response.json);
@@ -19,6 +19,6 @@ export function* fillPosts() {
   } catch (error) {
     yield put(uiActions.emitError(error, "fillPost worker"));
   } finally {
-    yield put(uiActions.stopFetching);
+    yield put(uiActions.stopFetching());
   }
 }

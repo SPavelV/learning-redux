@@ -6,7 +6,7 @@ import { uiActions } from "../../../ui/actions";
 
 export function* removePost({ payload: id }) {
   try {
-    yield put(uiActions.startFetching);
+    yield put(uiActions.startFetching());
 
     const response = yield apply(api, api.posts.remove, [id]);
 
@@ -19,6 +19,6 @@ export function* removePost({ payload: id }) {
   } catch (error) {
     yield put(uiActions.emitError(error, "removePost worker"));
   } finally {
-    yield put(uiActions.stopFetching);
+    yield put(uiActions.stopFetching());
   }
 }

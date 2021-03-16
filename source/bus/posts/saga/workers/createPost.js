@@ -8,7 +8,7 @@ import { uiActions } from "../../../ui/actions";
 
 export function* createPost({ payload: comment }) {
   try {
-    yield put(uiActions.startFetching);
+    yield put(uiActions.startFetching());
 
     const response = yield apply(api, api.posts.create, [comment]);
     const { data: post, message } = yield apply(response, response.json);
@@ -31,6 +31,6 @@ export function* createPost({ payload: comment }) {
   } catch (error) {
     yield put(uiActions.emitError(error, "createPost worker"));
   } finally {
-    yield put(uiActions.stopFetching);
+    yield put(uiActions.stopFetching());
   }
 }

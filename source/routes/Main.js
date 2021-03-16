@@ -13,9 +13,10 @@ import { Loading } from "../components";
 
 // Actions
 import { authActions } from "../bus/auth/actions";
+import { socketActions } from "../bus/socket/actions";
 
 // WebSocket
-import { joinSocketChanel } from "../init/socket";
+import { socket, joinSocketChanel } from "../init/socket";
 
 const mapStateToProps = (state) => {
   return {
@@ -26,6 +27,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   initializeAsync: authActions.initializeAsync,
+  ...socketActions,
 };
 
 @hot(module)
@@ -33,9 +35,18 @@ const mapDispatchToProps = {
 @connect(mapStateToProps, mapDispatchToProps)
 export default class Main extends Component {
   componentDidMount() {
-    this.props.initializeAsync();
+    const { initializeAsync, listenConnection } = this.props;
+
+    initializeAsync();
     joinSocketChanel();
+    listenConnection();
   }
+
+  componentWillUnmount() {
+    socket.removeListener("connect");
+    socket.removeListener("disconnect");
+  }
+
   render() {
     const { isAuthenticated, isInitialized } = this.props;
 

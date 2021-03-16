@@ -9,7 +9,7 @@ import { profileActions } from "../../../profile/actions";
 
 export function* authenticate() {
   try {
-    yield put(uiActions.startFetching);
+    yield put(uiActions.startFetching());
 
     const response = yield apply(api, api.auth.authenticate);
     const { data: profile, message } = yield apply(response, response.json);
